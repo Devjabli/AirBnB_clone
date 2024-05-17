@@ -29,3 +29,19 @@ class BaseModel:
         """
         self.updated_at = datetime.now()
         models.storage.save()
+
+    def to_dict(self):
+        """
+        """
+        tdict = self.__dict__.copy()
+        dt_attr = ["created_at", "updated_at"]
+        for attrb in dt_attr:
+            if attrb in tdict:
+                tdict[attrb] = tdict[attrb].isoformat()
+        tdict["__class__"] = self.__class__.__name__
+        return tdict
+    
+    def __str__(self):
+        """
+        """
+        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
