@@ -14,7 +14,6 @@ class FileStorage:
     __objects = {}
     __class_map = {
         "BaseModel": BaseModel,
-        # Add other models here as needed
     }
 
     def all(self):
@@ -33,4 +32,21 @@ class FileStorage:
         """
         with open(self.__file_path, 'w') as f:
             json.dump({key: value.to_dict() for key, value in self.__objects.items()}, f)
+    
+    def reload(self):
+        """"""
+        if not os.path.exists(self.__file_path):
+            return
+
+        try:
+            with open(self.__file_path, 'r') as f:
+                objdict = json.load(f)
+                for obj_data in objdict.values():
+                    class_name = obj_data["__class__"]
+                    if class_name in self.__class_map:
+                        cls = self.__class_map[class_name]
+                        del obj_data["__class__"]
+                        self.new(cls(**obj_data))
+        except FileNotFoundError:
+            pass
 
