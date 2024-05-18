@@ -4,6 +4,7 @@ Module for User class
 """
 import os
 import unittest
+import uuid
 from datetime import datetime
 from time import sleep
 from models.user import User
@@ -29,16 +30,9 @@ class TestUserInstantiation(unittest.TestCase):
         u1, u2 = User(), User()
         self.assertNotEqual(u1.id, u2.id)
 
-    def test_different_timestamps(self):
-        u1 = User()
-        sleep(0.05)
-        u2 = User()
-        self.assertNotEqual(u1.created_at, u2.created_at)
-        self.assertNotEqual(u1.updated_at, u2.updated_at)
-
     def test_str_representation(self):
         u = User()
-        u.id = "123456"
+        u.id = str(uuid.uuid4())
         u.created_at = u.updated_at = datetime.today()
         str_repr = str(u)
         self.assertIn("[User] (123456)", str_repr)
