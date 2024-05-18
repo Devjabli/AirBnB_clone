@@ -33,7 +33,7 @@ class FileStorage:
 
     def save(self):
         """ Serializing data __objects to JSON __file_path """
-        with open(self.__file_path, 'w', encoding='utf-8') as f:
+        with open(self.__file_path, 'w') as f:
             json.dump({key: value.to_dict() for key, value in self.__objects.items()}, f)
 
     def reload(self):
@@ -42,7 +42,7 @@ class FileStorage:
             return
 
         try:
-            with open(self.__file_path, 'r', encoding='utf-8') as f:
+            with open(self.__file_path, 'r') as f:
                 objdict = json.load(f)
                 for obj_data in objdict.values():
                     class_name = obj_data["__class__"]
