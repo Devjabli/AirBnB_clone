@@ -3,6 +3,9 @@
 """ Defines HBnB console class that serve project CRUD method. """
 
 import cmd
+from datetime import datetime
+from models import storage
+from models.base_model import BaseModel
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -11,6 +14,8 @@ class HBNBCommand(cmd.Cmd):
             prompt (str): command prompt.
     """
     prompt = "(hbnb) "
+
+    vl_classes = {'BaseModel': BaseModel}
 
     def emptyline(self):
         """Do nothing upon receiving an empty line."""
@@ -33,7 +38,137 @@ class HBNBCommand(cmd.Cmd):
             line (str): input line
         """
         return True
+    
+    def parse_arguments(self, line):
+        """
+        Custom argument parser to split input line into arguments.
 
+        Args:
+            line (str): input line
 
+        Returns:
+            list: list of arguments
+        """
+        return line.split()
+    
+    def do_create(self, line):
+        """
+        Create a new instance of BaseModel and save it to the JSON file.
+        
+        Args:
+            line (str): input line containing the class name.
+        """
+        commands = self.parse_arguments(line)
+
+        if len(commands) == 0:
+            print("** class name missing **")
+        elif commands[0] not in self.vl_classes:
+            print("** class doesn't exist **")
+        else:
+            new_instance = self.vl_classes[commands[0]]()
+            storage.new(new_instance)
+            storage.save()
+            print(new_instance.id)
+
+    def do_show(self, line):
+        """
+        Show the string representation of an instance.
+        Usage: show <class_name> <id>
+        """
+        commands = self.parse_arguments(line)
+
+        if len(commands) == 0:
+            print("** class name missing **")
+        elif commands[0] not in self.vl_classes:
+            print("** class doesn't exist **")
+        elif len(commands) < 2:
+            print("** instance id missing **")
+        else:
+            objects = storage.all()
+            key = "{}.{}".format(commands[0], commands[1])
+            if key in objects:
+                print(objects[key])
+            else:
+                print("** no instance found **")
+
+    def do_destroy(self, line):
+        """
+        Delete an instance based on the class name and id.
+        Usage: destroy <class_name> <id>
+        """
+        commands = self.parse_arguments(line)
+
+        if len(commands) == 0:
+            print("** class name missing **")
+        elif commands[0] not in self.vl_classes:
+            print("** class doesn't exist **")
+        elif len(commands) < 2:
+            print("** instance id missing **")
+        else:
+            objects = storage.all()
+            key = "{}.{}".format(commands[0], commands[1])
+            if key in objects:
+                del objects[key]
+                storage.save()
+                print(f"Instance {key} deleted")
+            else:
+                print("** no instance found **")
+    def do_all(self, line):
+        """
+        Print the string representation of all instances or a specific class.
+        Usage: all [<class_name>]
+        """
+        commands = self.parse_arguments(line)
+        objects = storage.all()
+
+        if len(commands) == 0:
+            for key, value in objects.items():
+                print(str(value))
+        elif commands[0] not in self.vl_classes:
+            print("** class doesn't exist **")
+        else:
+            for key, value in objects.items():
+                if key.split('.')[0] == commands[0]:
+                    print(str(value))
+    
+    def do_update(self, line):
+        """Updates an instance based on the class name and id
+        by adding or updating attribute
+        (save the change into the JSON file).
+        Usage: update <class name> <id> <attribute name> "<attribute value>"
+        Example: update BaseModel 1234-1234-1234 email "aibnb@holbertonschool.com"
+        """
+        args = self.parse_arguments(line)
+        attr_base = ["id", "created_at", "updated_at"]
+
+        if len(args) == 0:
+            print("** class name missing **")
+            return
+        if args[0] not in self.vl_classes:
+            print("** class doesn't exist **")
+            return
+        if len(args) == 1:
+            print("** instance id missing **")
+            return
+
+        instance_key = f"{args[0]}.{args[1]}"
+        objects = storage.all()
+
+        if instance_key not in objects:
+            print("** no instance found **")
+            return
+        if len(args) == 2:
+            print("** attribute name missing **")
+            return
+        if len(args) == 3:
+            print("** value missing **")
+            return
+
+        if args[2] not in attr_base:
+            instance = objects[instance_key]
+            setattr(instance, args[2], args[3])
+            instance.updated_at = datetime.now()
+            instance.save()
+    
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
