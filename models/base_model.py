@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-"""
-Representing the BaseModel class.
-"""
+
+""" Representing the BaseModel class. """
+
 from uuid import uuid4
 from datetime import datetime
 import models
@@ -27,9 +27,10 @@ class BaseModel:
         else:
             for key, value in kwargs.items():
                 if key in "created_at" or key in "updated_at":
-                    self.__dict__[key] = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
+                    self.__dict__[key] = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 else:
                     self.__dict__[key] = value
+
     def save(self):
         """
         Updating the attribute updated_at with current time 
@@ -54,3 +55,4 @@ class BaseModel:
         Return the string representation of the BaseModel instance.
         """
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
+
