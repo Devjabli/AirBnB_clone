@@ -2,7 +2,7 @@
 """
 Representing the BaseModel class.
 """
-from uuid import uuid4
+import uuid
 from datetime import datetime
 import models
 
@@ -18,15 +18,16 @@ class BaseModel:
             *args (Tuple): unused.
             **kwargs (dict): key and value of attributes.
         """
+        d_time = '%Y-%m-%dT%H:%M:%S.%f'
         if not kwargs:
-            self.id = str(uuid4())
+            self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
             models.storage.new(self)
         else:
             for key, value in kwargs.items():
                 if key in "created_at" or key in "updated_at":
-                    self.__dict__[key] = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                    self.__dict__[key] = datetime.strptime(value, d_time)
                 else:
                     self.__dict__[key] = value
     def save(self):
