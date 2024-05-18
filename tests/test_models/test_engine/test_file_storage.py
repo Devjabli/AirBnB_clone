@@ -56,7 +56,7 @@ class TestFileStorage(unittest.TestCase):
         user = User()
         self.storage.new(user)
         self.storage.save()
-        FileStorage._FileStorage__objects = {}  # Clear objects
+        FileStorage._FileStorage__objects = {}
         self.storage.reload()
         key = f"User.{user.id}"
         self.assertIn(key, self.storage.all())
@@ -71,7 +71,6 @@ class TestFileStorage(unittest.TestCase):
             self.assertEqual(self.storage.all(), {})
         except Exception as e:
             self.fail(f"reload() raised {e} unexpectedly!")
-
 
 if __name__ == "__main__":
     unittest.main()
