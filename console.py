@@ -183,6 +183,16 @@ class HBNBCommand(cmd.Cmd):
             setattr(instance, args[2], args[3])
             instance.updated_at = datetime.now()
             instance.save()
+
+    def default(self, line):
+        """
+        Handle <class name>.all() command.
+        """
+        if "." in line:
+            class_name, method_name = line.split(".")
+            method_name = method_name.split("(")[0]
+            if class_name in self.vl_classes and method_name == "all":
+                self.do_all(class_name)
     
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
