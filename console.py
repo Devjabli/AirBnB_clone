@@ -1,16 +1,14 @@
 #!/usr/bin/python3
 
-"""
-Defines HBnB console class that serve project CRUD method.
-"""
+""" Defines HBnB console class that serve project CRUD method. """
 
 import cmd
 
 class HBNBCommand(cmd.Cmd):
     """
-    Defining a command interpreter.
-    Attributes:
-        prompt (str): command prompt.
+        Defining a command interpreter.
+        Attributes:
+            prompt (str): command prompt.
     """
     prompt = "(hbnb) "
 
