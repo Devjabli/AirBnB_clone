@@ -4,8 +4,10 @@
 
 ![](pics/65f4a1dd9c51265f49d0.png)
 
-### Descreption
-The first step is to write a command interpreter to manage your AirBnB objects. This is crucial as it forms the foundation for building your first full web application: the AirBnB clone v1.
+## Descreption
+### => The first step is to write a command interpreter to manage your AirBnB objects. This is crucial as it forms the foundation for building your first full web application: the AirBnB clone v1.
+
+![](pics/815046647d23428a14ca.png)
 
 ### Goals
 - **Parent Class (BaseModel)**: Handle initialization, serialization, and deserialization of future instances.
@@ -118,5 +120,3 @@ $
 ```
 $ echo "python3 -m unittest discover tests" | bash
 ```
-
-![](pics/815046647d23428a14ca.png)
