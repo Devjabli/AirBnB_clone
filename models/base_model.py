@@ -18,8 +18,7 @@ class BaseModel:
             *args (Tuple): unused.
             **kwargs (dict): key and value of attributes.
         """
-        DATE_TIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
-        if len(kwargs) == 0:
+        if not kwargs:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
@@ -27,7 +26,7 @@ class BaseModel:
         else:
             for key, value in kwargs.items():
                 if key in "created_at" or key in "updated_at":
-                    self.__dict__[key] = datetime.strptime(value, DATE_TIME_FORMAT)
+                    self.__dict__[key] = datetime.strptime(value, DATE_TIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%f')
                 else:
                     self.__dict__[key] = value
     def save(self):
