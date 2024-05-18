@@ -8,17 +8,15 @@ from datetime import datetime
 import models
 
 class BaseModel:
-    """
-    Representing the BaseModel of the console project.
-    """
-
+    """ Representing the BaseModel of the console project. """
+    
     def __init__(self, *args, **kwargs):
 
         """
         Initializer of BaseModel
 
         Args:
-            *args: unused.
+            *args (Tuple): unused.
             **kwargs (dict): key and value of attributes.
         """
         if len(kwargs) == 0:
