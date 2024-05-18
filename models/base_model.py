@@ -9,7 +9,7 @@ import models
 
 class BaseModel:
     """ Representing the BaseModel of the console project. """
-    
+
     def __init__(self, *args, **kwargs):
 
         """
