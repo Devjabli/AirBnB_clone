@@ -101,11 +101,11 @@ class TestUserToDict(unittest.TestCase):
 
     def test_to_dict_added_attributes(self):
         u = User()
-        u.middle_name = "Jabli"
-        u.my_number = 64
+        u.middle_name = "Aroussi"
+        u.my_number = 98
         u_dict = u.to_dict()
-        self.assertEqual(u_dict["middle_name"], "Jabli")
-        self.assertEqual(u_dict["my_number"], 64)
+        self.assertEqual(u_dict["middle_name"], "Aroussi")
+        self.assertEqual(u_dict["my_number"], 98)
 
 
 if __name__ == '__main__':
