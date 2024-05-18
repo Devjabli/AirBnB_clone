@@ -6,6 +6,7 @@ import cmd
 from datetime import datetime
 from models import storage
 from models.base_model import BaseModel
+from models.user import User
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -15,7 +16,7 @@ class HBNBCommand(cmd.Cmd):
     """
     prompt = "(hbnb) "
 
-    vl_classes = {'BaseModel': BaseModel}
+    vl_classes = {'BaseModel': BaseModel, 'User': User}
 
     def emptyline(self):
         """Do nothing upon receiving an empty line."""
