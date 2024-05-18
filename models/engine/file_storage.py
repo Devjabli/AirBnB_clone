@@ -2,7 +2,6 @@
 """
 Defining FileStorage model to manipulate data to json
 """
-import os
 import json
 from models.base_model import BaseModel
 
@@ -37,8 +36,6 @@ class FileStorage:
 
     def reload(self):
         """ Deserlializing JSON file from __file_path to __objects as dictionary"""
-        if not os.path.exists(self.__file_path):
-            return
         try:
             with open(self.__file_path, 'r', encoding='utf-8') as f:
                 objdict = json.load(f)
