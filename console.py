@@ -184,15 +184,27 @@ class HBNBCommand(cmd.Cmd):
             instance.updated_at = datetime.now()
             instance.save()
 
+    def do_count(self, class_name):
+        """Count number of instances class"""
+
+        if class_name not in self.vl_classes:
+            print(" ** class doesn't exist ** ")
+            return
+        length = sum(1 for key in storage.all() if key.startswith(class_name + '.'))
+        print(length)
+
     def default(self, line):
         """
-        Handle <class name>.all() command.
+        Handling default ALL COUNT command.
         """
         if "." in line:
             class_name, method_name = line.split(".")
             method_name = method_name.split("(")[0]
-            if class_name in self.vl_classes and method_name == "all":
-                self.do_all(class_name)
+            if class_name in self.vl_classes:
+                if method_name == "all":
+                    self.do_all(class_name)
+                elif method_name == "count":
+                    self.do_count(class_name)
     
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
