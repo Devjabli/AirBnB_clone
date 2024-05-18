@@ -30,6 +30,10 @@ class TestFileStorage(unittest.TestCase):
             os.rename("tmp", self.file_path)
         FileStorage._FileStorage__objects = {}
 
+    def test_all_method(self):
+        """Test all method"""
+        total = self.storage.all()
+        self.assertEqual(self.storage.all(), total)
 
     def test_new_method(self):
         """Test new method"""
