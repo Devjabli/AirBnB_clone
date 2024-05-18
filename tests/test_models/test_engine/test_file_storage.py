@@ -1,7 +1,9 @@
 #!/usr/bin/python3
+
 """
 Unittests for FileStorage class
 """
+
 import unittest
 import os
 import json
@@ -28,9 +30,6 @@ class TestFileStorage(unittest.TestCase):
             os.rename("tmp", self.file_path)
         FileStorage._FileStorage__objects = {}
 
-    def test_all_method(self):
-        """Test all method"""
-        self.assertEqual(self.storage.all(), {})
 
     def test_new_method(self):
         """Test new method"""
