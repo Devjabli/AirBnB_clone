@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 """
 Representing the BaseModel class.
 """
@@ -32,7 +31,7 @@ class BaseModel:
                     self.__dict__[key] = value
     def save(self):
         """
-        Updating the attribute -> updated_at with current time 
+        Updating the attribute updated_at with current time 
         """
         self.updated_at = datetime.now()
         models.storage.save()
