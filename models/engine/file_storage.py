@@ -22,7 +22,7 @@ class FileStorage:
 
     __file_path = "file.json"
     __objects = {}
-    __class_map = {
+    class_map = {
         "BaseModel": BaseModel,
         "User": User,
         "Amenity": Amenity,
@@ -53,8 +53,8 @@ class FileStorage:
                 objdict = json.load(f)
                 for obj_data in objdict.values():
                     class_name = obj_data["__class__"]
-                    if class_name in self.__class_map:
-                        cls = self.__class_map[class_name]
+                    if class_name in self.class_map:
+                        cls = self.class_map[class_name]
                         del obj_data["__class__"]
                         self.new(cls(**obj_data))
         except FileNotFoundError:
