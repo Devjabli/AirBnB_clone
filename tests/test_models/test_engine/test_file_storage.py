@@ -30,12 +30,12 @@ class TestFileStorage(unittest.TestCase):
             os.rename("tmp", self.file_path)
         FileStorage._FileStorage__objects = {}
 
-    def test_all_method(self):
+    def test_all(self):
         """Test all method"""
         total = self.storage.all()
         self.assertEqual(self.storage.all(), total)
 
-    def test_new_method(self):
+    def test_new(self):
         """Test new method"""
         user = User()
         self.storage.new(user)
@@ -43,7 +43,7 @@ class TestFileStorage(unittest.TestCase):
         self.assertIn(key, self.storage.all())
         self.assertEqual(self.storage.all()[key], user)
 
-    def test_save_method(self):
+    def test_save(self):
         """Test save method"""
         user = User()
         self.storage.new(user)
@@ -54,7 +54,7 @@ class TestFileStorage(unittest.TestCase):
             self.assertIn(key, data)
             self.assertEqual(data[key]["id"], user.id)
 
-    def test_reload_method(self):
+    def test_reload(self):
         """Test reload method"""
         user = User()
         self.storage.new(user)
