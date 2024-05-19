@@ -127,6 +127,7 @@ class HBNBCommand(cmd.Cmd):
                 print(f"Instance {key} deleted")
             else:
                 print("** no instance found **")
+
     def do_all(self, line):
         """
         Print the string representation of all instances or a specific class.
