@@ -59,12 +59,9 @@ class HBNBCommand(cmd.Cmd):
 
         Args:
             line (str): input line
-
-        Returns:
-            list: list of arguments
         """
         return line.split()
-    
+
     def do_create(self, line):
         """
         Create a new instance of BaseModel and save it to the JSON file.
@@ -120,7 +117,7 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         else:
             objects = storage.all()
-            key = "{}.{}".format(commands[0], commands[1])
+            key = f"{commands[0]}.{commands[1]}"
             if key in objects:
                 del objects[key]
                 storage.save()
@@ -145,14 +142,9 @@ class HBNBCommand(cmd.Cmd):
             for key, value in objects.items():
                 if key.split('.')[0] == commands[0]:
                     print(str(value))
-    
+
     def do_update(self, line):
-        """Updates an instance based on the class name and id
-        by adding or updating attribute
-        (save the change into the JSON file).
-        Usage: update <class name> <id> <attribute name> "<attribute value>"
-        Example: update BaseModel 1234-1234-1234 email "aibnb@holbertonschool.com"
-        """
+        """Updates an instance based on the class name and id"""
         args = self.parse_arguments(line)
         attr_base = ["id", "created_at", "updated_at"]
 
