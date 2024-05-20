@@ -44,13 +44,11 @@ class TestFileStorage(unittest.TestCase):
     def test_save(self):
         """Test that save updates updated_at attribute"""
         old_updated_at = self.base_model.updated_at
-        time.sleep(1)  # Sleep for a second to ensure the timestamp changes
+        time.sleep(1)
         self.base_model.save()
         new_updated_at = self.base_model.updated_at
         self.assertNotEqual(old_updated_at, new_updated_at)
         self.assertTrue(new_updated_at > old_updated_at)
-
-        # Check that the object is saved in storage
         self.assertIn(f"BaseModel.{self.base_model.id}", self.storage.all())
 
     def test_reload(self):
