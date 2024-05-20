@@ -107,6 +107,25 @@ class TestUserToDict(unittest.TestCase):
         self.assertEqual(u_dict["middle_name"], "Aroussi")
         self.assertEqual(u_dict["my_number"], 64)
 
+class TestUserAttributes(unittest.TestCase):
+    """Tests for User class attributes"""
+
+    def test_email_is_str(self):
+        user = User()
+        self.assertIsInstance(user.email, str)
+
+    def test_password_is_str(self):
+        user = User()
+        self.assertIsInstance(user.password, str)
+
+    def test_first_name_is_str(self):
+        user = User()
+        self.assertIsInstance(user.first_name, str)
+
+    def test_last_name_is_str(self):
+        user = User()
+        self.assertIsInstance(user.last_name, str)
+
 
 if __name__ == '__main__':
     unittest.main()
