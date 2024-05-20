@@ -14,7 +14,7 @@ from models.place import Place
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
-
+from models import storage
 
 class TestFileStorageInstantiation(unittest.TestCase):
     """Tests for FileStorage instantiation."""
@@ -33,7 +33,6 @@ class TestFileStorageInstantiation(unittest.TestCase):
         self.assertIsInstance(FileStorage._FileStorage__objects, dict)
 
     def test_storage_initializes(self):
-        from models import storage
         self.assertIsInstance(storage, FileStorage)
 
 
@@ -64,16 +63,13 @@ class TestFileStorageMethods(unittest.TestCase):
             pass
 
     def test_all(self):
-        from models import storage
         self.assertIsInstance(storage.all(), dict)
 
     def test_all_with_arg(self):
-        from models import storage
         with self.assertRaises(TypeError):
             storage.all(None)
 
     def test_new(self):
-        from models import storage
         instances = [BaseModel(), User(), State(), Place(), City(), Amenity(), Review()]
         for instance in instances:
             storage.new(instance)
@@ -82,17 +78,14 @@ class TestFileStorageMethods(unittest.TestCase):
             self.assertIn(instance, storage.all().values())
 
     def test_new_with_args(self):
-        from models import storage
         with self.assertRaises(TypeError):
             storage.new(BaseModel(), 1)
 
     def test_new_with_none(self):
-        from models import storage
         with self.assertRaises(AttributeError):
             storage.new(None)
 
     def test_save(self):
-        from models import storage
         instances = [BaseModel(), User(), State(), Place(), City(), Amenity(), Review()]
         for instance in instances:
             storage.new(instance)
@@ -103,12 +96,10 @@ class TestFileStorageMethods(unittest.TestCase):
                 self.assertIn(f"{instance.__class__.__name__}.{instance.id}", save_text)
 
     def test_save_with_arg(self):
-        from models import storage
         with self.assertRaises(TypeError):
             storage.save(None)
 
     def test_reload(self):
-        from models import storage
         instances = [BaseModel(), User(), State(), Place(), City(), Amenity(), Review()]
         for instance in instances:
             storage.new(instance)
@@ -119,7 +110,6 @@ class TestFileStorageMethods(unittest.TestCase):
             self.assertIn(f"{instance.__class__.__name__}.{instance.id}", objs)
 
     def test_reload_with_arg(self):
-        from models import storage
         with self.assertRaises(TypeError):
             storage.reload(None)
 
