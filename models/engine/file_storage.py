@@ -11,6 +11,7 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 
+
 class FileStorage:
     """
     Representing a storage engine
@@ -19,6 +20,7 @@ class FileStorage:
         __file_path (str): where objects saved to this file.
         __objects (dict): dictionary of objects.
     """
+
 
     __file_path = "file.json"
     __objects = {}
