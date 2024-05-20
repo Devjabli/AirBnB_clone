@@ -110,19 +110,23 @@ class TestUserToDict(unittest.TestCase):
 class TestUserAttributes(unittest.TestCase):
     """Tests for User class attributes"""
 
-    def test_email_is_str(self):
+    def test_email(self):
+        """Test if string"""
         user = User()
         self.assertIsInstance(user.email, str)
 
-    def test_password_is_str(self):
+    def test_password(self):
+        """Test if string"""
         user = User()
         self.assertIsInstance(user.password, str)
 
-    def test_first_name_is_str(self):
+    def test_first_name(self):
+        """Test if string"""
         user = User()
         self.assertIsInstance(user.first_name, str)
 
-    def test_last_name_is_str(self):
+    def test_last_name(self):
+        """Test if string"""
         user = User()
         self.assertIsInstance(user.last_name, str)
 
