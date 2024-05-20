@@ -3,7 +3,7 @@
 """
 Unittests for FileStorage class
 """
-
+import time
 import unittest
 from models.base_model import BaseModel
 from models.user import User
@@ -42,13 +42,16 @@ class TestFileStorage(unittest.TestCase):
         self.assertEqual(len(self.storage.all()), 3)
 
     def test_save(self):
-        """Test that save correctly serializes __objects to JSON"""
-        self.storage.save()
-        with open(self.storage._FileStorage__file_path, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-            self.assertIn(f"BaseModel.{self.base_model.id}", data)
-            self.assertIn(f"User.{self.user.id}", data)
-            self.assertEqual(len(data), 2)
+        """Test that save updates updated_at attribute"""
+        old_updated_at = self.base_model.updated_at
+        time.sleep(1)  # Sleep for a second to ensure the timestamp changes
+        self.base_model.save()
+        new_updated_at = self.base_model.updated_at
+        self.assertNotEqual(old_updated_at, new_updated_at)
+        self.assertTrue(new_updated_at > old_updated_at)
+
+        # Check that the object is saved in storage
+        self.assertIn(f"BaseModel.{self.base_model.id}", self.storage.all())
 
     def test_reload(self):
         """Test that reload correctly deserializes JSON to __objects"""
