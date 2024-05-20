@@ -13,7 +13,6 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 
-
 class HBNBCommand(cmd.Cmd):
     """
         Defining a command interpreter.
@@ -21,17 +20,18 @@ class HBNBCommand(cmd.Cmd):
             prompt (str): command prompt.
     """
 
+
     prompt = "(hbnb) "
 
     vl_classes = {
-        "BaseModel": BaseModel,
+        "BaseModel": BaseModel, 
         "User": User,
         "Amenity": Amenity,
         "City": City,
         "Place": Place,
         "Review": Review,
         "State": State
-    }
+        }
 
     def emptyline(self):
         """Do nothing upon receiving an empty line."""
@@ -46,7 +46,7 @@ class HBNBCommand(cmd.Cmd):
         """
         return True
 
-    def do_EOF(self, line):  # pylint: disable=invalid-name
+    def do_EOF(self, line): # pylint: disable=invalid-name
         """
         EOF signal to exit the program.
 
@@ -54,7 +54,7 @@ class HBNBCommand(cmd.Cmd):
             line (str): input line
         """
         return True
-
+    
     def parse_arguments(self, line):
         """
         Custom argument parser to split input line into arguments.
@@ -67,7 +67,7 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, line):
         """
         Create a new instance of BaseModel and save it to the JSON file.
-
+        
         Args:
             line (str): input line containing the class name.
         """
@@ -200,8 +200,6 @@ class HBNBCommand(cmd.Cmd):
                     self.do_all(class_name)
                 elif method_name == "count":
                     self.do_count(class_name)
-
-
+    
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
-
