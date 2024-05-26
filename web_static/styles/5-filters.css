@@ -1,16 +1,16 @@
-div.container {
+.container {
     max-width: 1000px;
     margin: 30px auto;
     text-align: center;
 }
-section.filters {
+.filters {
     background-color: white;
     height: 70px;
     width: 100%;
     border: 1px solid #DDDDDD;
     border-radius: 4px;
 }
-section.filters button {
+.filters button {
     background-color: #FF5A5F;
     height: 48px;
     width: 20%;
@@ -21,7 +21,7 @@ section.filters button {
     float: right;
     margin: 11px 30px;
 }
-section.filters button:hover {
+.filters button:hover {
     opacity: .9;
 }
 
