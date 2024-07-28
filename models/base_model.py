@@ -7,6 +7,7 @@ from datetime import datetime
 import models
 
 class BaseModel:
+
     """ Representing the BaseModel of the console project. """
 
     def __init__(self, *args, **kwargs):
@@ -27,7 +28,9 @@ class BaseModel:
         else:
             for key, value in kwargs.items():
                 if key in "created_at" or key in "updated_at":
-                    self.__dict__[key] = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                    self.__dict__[key] = datetime.strptime(
+                        value, "%Y-%m-%dT%H:%M:%S.%f"
+                        )
                 else:
                     self.__dict__[key] = value
 

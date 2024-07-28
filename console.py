@@ -15,14 +15,13 @@ from models.state import State
 
 
 class HBNBCommand(cmd.Cmd):
+
     """
     Defining a command interpreter.
     Attributes:
         prompt (str): command prompt.
     """
-
     prompt = "(hbnb) "
-
     vl_classes = {
         "BaseModel": BaseModel,
         "User": User,
