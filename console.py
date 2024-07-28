@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-""" Defines HBnB console class that serve project CRUD method. """
+""" Defines HBnB console class that serves project CRUD methods. """
 
 import cmd
 from datetime import datetime
@@ -13,25 +13,25 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 
+
 class HBNBCommand(cmd.Cmd):
     """
-        Defining a command interpreter.
-        Attributes:
-            prompt (str): command prompt.
+    Defining a command interpreter.
+    Attributes:
+        prompt (str): command prompt.
     """
-
 
     prompt = "(hbnb) "
 
     vl_classes = {
-        "BaseModel": BaseModel, 
+        "BaseModel": BaseModel,
         "User": User,
         "Amenity": Amenity,
         "City": City,
         "Place": Place,
         "Review": Review,
         "State": State
-        }
+    }
 
     def emptyline(self):
         """Do nothing upon receiving an empty line."""
@@ -39,26 +39,23 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, line):
         """
-        Quit commant exit the programm
-
+        Quit command to exit the program.
         Args:
             line (str): input line
         """
         return True
 
-    def do_EOF(self, line): # pylint: disable=invalid-name
+    def do_EOF(self, line):  # pylint: disable=invalid-name
         """
         EOF signal to exit the program.
-
         Args:
             line (str): input line
         """
         return True
-    
+
     def parse_arguments(self, line):
         """
         Custom argument parser to split input line into arguments.
-
         Args:
             line (str): input line
         """
@@ -67,7 +64,6 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, line):
         """
         Create a new instance of BaseModel and save it to the JSON file.
-        
         Args:
             line (str): input line containing the class name.
         """
@@ -183,7 +179,7 @@ class HBNBCommand(cmd.Cmd):
         """Count number of instances class"""
 
         if class_name not in self.vl_classes:
-            print(" ** class doesn't exist ** ")
+            print("** class doesn't exist **")
             return
         length = sum(1 for key in storage.all() if key.startswith(class_name + '.'))
         print(length)
@@ -200,6 +196,7 @@ class HBNBCommand(cmd.Cmd):
                     self.do_all(class_name)
                 elif method_name == "count":
                     self.do_count(class_name)
-    
+
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
